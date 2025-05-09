@@ -1,0 +1,21 @@
+﻿@model CinemaManager1.Models.Cinema.Producer
+
+@{
+    ViewData["Title"] = "Movies by " + Model.Name;
+}
+
+<h2>Movies by @Model.Name</h2>
+
+@if (Model.Movies != null && Model.Movies.Any())
+{
+    <ul>
+        @foreach (var movie in Model.Movies)
+        {
+            <li>@movie.Title (@movie.Genre)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>This producer has no movies.</p>
+}

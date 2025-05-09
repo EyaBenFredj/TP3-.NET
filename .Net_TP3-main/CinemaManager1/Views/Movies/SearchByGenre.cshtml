@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CinemaManager1.Models.Cinema.Movie>
+
+<h2>Rechercher des films par genre</h2>
+
+@using (Html.BeginForm("SearchByGenre", "Movies", FormMethod.Get))
+{
+    <p>
+        Genre: @Html.DropDownList("genre", new SelectList(ViewBag.Genres, "Value", "Text"), "Sélectionnez un genre")
+        <input type="submit" value="Rechercher" />
+    </p>
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Résultats de la recherche :</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Genre</th>
+                <th>Producteur</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.Genre</td>
+                    <td>@movie.Producer?.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun film trouvé correspondant à votre recherche.</p>
+}
